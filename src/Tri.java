@@ -19,6 +19,8 @@ public class Tri extends Factor {
     private final String tri = "^(sin|cos)\\(.*?\\)(\\*\\*\\d*)?$";
     private final Pattern patternTri = Pattern.compile(tri);
     //match triFactor
+    private final String square = "^x\\*x$";
+    private final Pattern patternSquare = Pattern.compile(square);
 
     public Tri(String str, BigInteger index, String sign) {
         factors = new HashMap<>();
@@ -35,6 +37,10 @@ public class Tri extends Factor {
         Parser parser = new Parser(lexer);
         Expr expr = parser.parserExpr("+");
         expression = expr.toString();
+        Matcher matcherSquare = patternSquare.matcher(expression);
+        if (matcherSquare.find()) {
+            expression = "x**2";
+        }
         Matcher matcherNum = patternNum.matcher(expression);
         Matcher matcherVar = patternVar.matcher(expression);
         Matcher matcherTri = patternTri.matcher(expression);

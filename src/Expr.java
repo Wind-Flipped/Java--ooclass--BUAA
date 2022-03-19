@@ -88,10 +88,51 @@ public class Expr extends Factor {
         String simplifyOutput = output.toString();
         simplifyOutput = simplifyOutput.replaceAll("0(.+)", "$1")
                 .replaceAll("([^\\d])1\\*", "$1")
-                //.replaceAll("(x)\\*\\*2([^\\d])", "$1*x$2")
+                .replaceAll("(x)\\*\\*2([^\\d])", "$1*x$2")
+                .replaceAll("(sin\\(|cos\\()x\\*x\\)","$1x**2)")
                 //.replaceAll("^(-.*?)\\+(.*)", "$2$1")
                 .replaceAll("^\\+(.*)", "$1");
+        if (simplifyOutput.charAt(0) == '-') {
+            simplifyOutput = reverse(simplifyOutput);
+        }
+
         return simplifyOutput;
+    }
+
+    public String reverse(String str) {
+        int brackets = 0;
+        int pos = 0;
+        int length = str.length();
+        for (; pos < length; pos += 1) {
+            if (str.charAt(pos) == '(') {
+                brackets += 1;
+            } else if (str.charAt(pos) == ')') {
+                brackets -= 1;
+            } else if (str.charAt(pos) == '+') {
+                if (brackets == 0) {
+                    return str.substring(pos + 1, length) + str.substring(0, pos);
+                }
+            }
+        }
+        return str;
+    }
+
+    public String simplifySquare(String str) {
+        int brackets = 0;
+        int pos = 0;
+        int length = str.length();
+        for (; pos < length; pos += 1) {
+            if (str.charAt(pos) == '(') {
+                brackets += 1;
+            } else if (str.charAt(pos) == ')') {
+                brackets -= 1;
+            } else if (str.charAt(pos) == '+') {
+                if (brackets == 0) {
+                    return str.substring(pos + 1, length) + str.substring(0, pos);
+                }
+            }
+        }
+        return str;
     }
 
     public HashMap<HashMap<String, BigInteger>, BigInteger> getFactors() {
