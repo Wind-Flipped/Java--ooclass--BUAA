@@ -88,7 +88,7 @@ public class Expr extends Factor {
         String simplifyOutput = output.toString();
         simplifyOutput = simplifyOutput.replaceAll("0(.+)", "$1")
                 .replaceAll("([^\\d])1\\*", "$1")
-                .replaceAll("(x)\\*\\*2([^\\d])", "$1*x$2")
+                .replaceAll("(x)\\*\\*2([^\\d]|$)", "$1*x$2")
                 .replaceAll("(sin\\(|cos\\()x\\*x\\)","$1x**2)")
                 //.replaceAll("^(-.*?)\\+(.*)", "$2$1")
                 .replaceAll("^\\+(.*)", "$1");
