@@ -27,7 +27,7 @@ public class Sum extends Factor {
             stringBuilder.append("+");
             //stringBuilder.append("(");
             String var = parameters[3].replaceAll("sin","abc");
-            var = var.replaceAll("i", String.valueOf(start));
+            var = var.replaceAll("i", "(" + start + ")");
             var = var.replaceAll("abc","sin");
             stringBuilder.append(var);
             //stringBuilder.append(")");

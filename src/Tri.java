@@ -10,7 +10,7 @@ public class Tri extends Factor {
     private final String triMode = "^(sin|cos)\\((?<content>.*?)\\)$";
     private final Pattern patternTriMode = Pattern.compile(triMode);
     //get inner expr
-    private final String num = "^[+-]?\\d*?$";
+    private final String num = "^\\d*?$";
     private final Pattern patternNum = Pattern.compile(num);
     //match numFactor
     private final String var = "^x(\\*\\*\\d*)?$";
